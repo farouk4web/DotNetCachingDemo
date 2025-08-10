@@ -18,8 +18,14 @@ Demo ASP.NET Core app demonstrating different caching techniques:
 2. Update Redis connection string in `Program.cs` if needed.  
 3. Update SQL Server connection string and run cache table creation script:  
 
-```bash
-dotnet sql-cache create "<your-connection-string>" dbo CacheItems
+create dbo CacheItems
+CREATE TABLE [dbo].[CacheItems] (
+    [Id] NVARCHAR(449) NOT NULL PRIMARY KEY,
+    [Value] VARBINARY(MAX) NOT NULL,
+    [ExpiresAtTime] DATETIMEOFFSET NOT NULL,
+    [SlidingExpirationInSeconds] BIGINT NULL,
+    [AbsoluteExpiration] DATETIMEOFFSET NULL
+);
 
 
 Run the project and test the endpoints:
